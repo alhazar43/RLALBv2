@@ -1,1 +1,3 @@
 Add new features
+
+Keep my main branch clean
