@@ -140,7 +140,7 @@ class GAT(keras.Model):
         **kwargs,
     ):
         super().__init__(**kwargs)
-        self.preprocess = keras.layers.Dense(hidden_units * num_heads, activation="relu")
+        self.preprocess = keras.layers.Dense(hidden_units * num_heads, activation="relu", input_dim=20)
         self.attention_layers = [
             MultiHeadGraphAttention(hidden_units, num_heads) for _ in range(num_layers)
         ]

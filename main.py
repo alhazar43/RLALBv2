@@ -1,6 +1,6 @@
 import numpy as np
-from agent import PPOAgent
-from env import ALBEnv
+from model.agent import PPOAgent
+from model.env import ALBEnv
 from tqdm.auto import tqdm
 import os
 import matplotlib.pyplot as plt
@@ -21,7 +21,7 @@ else:
     pi = np.random.choice(list(range(2,9)))
     instance_name = "instance_n={}_{}p{}".format(str(n), str(idx), str(pi))
     
-instance = './data/n={}/'.format(str(n)) + instance_name + '.txt'
+instance = 'data/otto2014/n={}/'.format(str(n)) + instance_name + '.txt'
 
 soln = []
 best_soln = []
@@ -35,14 +35,14 @@ alpha = 0.003
 agent = PPOAgent(batch_size=batch_size, alpha=alpha, n_epochs=n_epochs)
 
 
-out_dir = './output'
+out_dir = os.path.join(os.path.dirname(__file__), "output")
 
 if not os.path.isdir(out_dir):
     os.makedirs(out_dir)
 
-fig_name = out_dir + "/" + instance_name + "_training_{}.pdf".format(str(episode))
-csv_name = out_dir + "/" + instance_name + "_training_{}.csv".format(str(episode))
-txt_name = out_dir + "/" + instance_name + "_training_{}.txt".format(str(episode))
+fig_name = os.path.normpath(os.path.join(out_dir, instance_name + "_training_{}.pdf".format(str(episode))))
+csv_name = os.path.normpath(os.path.join(out_dir, instance_name + "_training_{}.csv".format(str(episode))))
+txt_name = os.path.normpath(os.path.join(out_dir, instance_name + "_training_{}.txt".format(str(episode))))
 
 
 
@@ -65,7 +65,6 @@ for i in pbar:
     while not env.episode_done:
         
         action, prob, val = agent.choose_action(observation)
-        print(prob)
         observation_, reward, done, info = env.step(action)
         global_step += 1
         score += reward

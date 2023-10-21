@@ -1,12 +1,8 @@
 
-import os
-import re
-from cv2 import DISOpticalFlow_create
-
 import gym
 import numpy as np
 from gym import spaces
-from utils import InstanceLoader
+from .utils import InstanceLoader
 
 
 class ALBEnv(gym.Env):
@@ -43,7 +39,7 @@ class ALBEnv(gym.Env):
             'prec_mask': np.array(self.prec==0, dtype=np.bool_),
             'successor' : np.array(self.fols, dtype=np.int32),
             'predcessor' : np.array(self.pres, dtype=np.int32),
-            'graph': np.array(self.graph, dtype=np.int),
+            'graph': np.array(self.graph, dtype=int),
             'station_load': 0,
             'num_station': 1
         }            
@@ -121,7 +117,7 @@ class ALBEnv(gym.Env):
             'prec_mask': np.array(self.prec==0, dtype=np.bool_),
             'successor' : np.array(self.fols, dtype=np.int32),
             'predcessor' : np.array(self.pres, dtype=np.int32),
-            'graph': np.array(self.graph, dtype=np.int),
+            'graph': np.array(self.graph, dtype=int),
             'station_load': 0,
             'num_station': 1
         }

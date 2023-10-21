@@ -1,9 +1,5 @@
-from ctypes.wintypes import PINT
 import re
 import numpy as np
-import tensorflow as tf
-from numba import jit
-from collections import defaultdict
 
 def observation_and_action_constraint_splitter(obs):
     return obs['observations'], obs['action_mask']
@@ -101,7 +97,11 @@ class InstanceLoader:
         return self._idle
     
     def data_parser(self):
-        with open(self.name, 'r') as f:
+        import os
+        cur_dir = os.path.dirname(__file__)
+        par_dir = os.path.split(cur_dir)[0]
+        file_path = os.path.normpath(os.path.join(par_dir, self.name))
+        with open(file_path, 'r') as f:
             no_break = "".join(line for line in f if not line.isspace())
             split_text = re.split("<.*>+\n", no_break)
 
