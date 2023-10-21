@@ -1,2 +1,7 @@
 # Ignore these
 *.csv
+/data/otto2014/n=100
+/data/otto2014/n=1000
+/data/otto2014/n=50
+/data/otto2014/n=20
+/data/old-salbp/orig
